@@ -1,5 +1,15 @@
 class Solution {
 public:
+    //STL有四个二分算法:lower_bound
+    //binary_search/equal_range/lower_bound/upper_bound
+    int searchInsert(vector<int>& nums, int target) {
+        auto it = lower_bound(nums.begin(), nums.end(), target);
+        return it-nums.begin();
+    }
+};
+
+class Solution3 {
+public:
     //剪枝优化了一点点
     //注意若用while(i<=j)和i=mid+1和mid-1则ij可能有一个会越界
     //<=的形式只适合单值和一定能找到的情况，用我这种ij最后在一起且不会越界

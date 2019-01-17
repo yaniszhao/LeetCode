@@ -1,4 +1,37 @@
 class Solution {
+public:
+    //STL有四个二分算法:equal_range
+    //binary_search/equal_range/lower_bound/upper_bound
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> ans={-1, -1};
+        if (nums.empty()) return ans;
+        auto pair = equal_range(nums.begin(), nums.end(), target);
+        if (pair.first==nums.end() || *pair.first!=target) return ans;
+        ans[0]=pair.first-nums.begin();
+        ans[1]=pair.second-nums.begin()-1;
+        return ans;
+    }
+};
+
+class Solution4 {
+public:
+    //STL有四个二分算法:这里用后两个
+    //binary_search/equal_range/lower_bound/upper_bound
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> ans={-1, -1};
+        if (nums.empty()) return ans;
+        vector<int>::iterator it1, it2;
+        //lower_bound是返回第一个target的位置或者是应该插入的位置
+        it1 = lower_bound(nums.begin(), nums.end(), target);
+        if (it1==nums.end() || *it1!=target) return ans;
+        it2 = upper_bound(nums.begin(), nums.end(), target);
+        ans[0]=it1-nums.begin();
+        ans[1]=it2-nums.begin()-1;
+        return ans;
+    }
+};
+
+class Solution3 {
 public://两个二分复杂度还是O(logn)，下面个有点别扭，改写下
     vector<int> searchRange(vector<int>& nums, int target) {
         vector<int> ans={-1, -1};
